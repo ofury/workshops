@@ -1,12 +1,12 @@
 {
   "files.exclude": {
     ".theia": true,
-    ".gitpod.yml": true,
     ".git": true,
     "automatic_animation": true,
     "clean_dart_uis": true,
     "tactical_operators": true,
     ".gitpod.dockerfile": true,
-    ".vscode": true
+    ".vscode": true,
+    ".gitpod.yml": true
   }
 }
