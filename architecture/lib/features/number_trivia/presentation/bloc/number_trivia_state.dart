@@ -1,3 +1,5 @@
+//The States outputted by the Bloc is what controls the UI.
+
 import 'package:arch/features/number_trivia/domain/entities/number_trivia.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
