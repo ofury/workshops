@@ -7,6 +7,7 @@
     "tactical_operators": true,
     ".gitpod.dockerfile": true,
     ".vscode": true,
-    ".gitpod.yml": true
+    ".gitpod.yml": true,
+    "architecture": true
   }
 }
