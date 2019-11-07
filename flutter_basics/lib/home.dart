@@ -11,10 +11,12 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    _getListData().then((data) =>
+    _getListData(hasError: true).then((data) =>
         //when data retrieved call setState with that data
         setState(() {
           _pageData = data;
+        })).catchError((error) =>setState((){
+          _pageData = [error];
         }));
     super.initState();
   }
@@ -31,9 +33,12 @@ Widget build(BuildContext context) {
   ));
 }
 
-  // Return a list of data after 1 second to emulate network request
-  Future<List<String>> _getListData() async {
+  //Return a list of data after 1 second to emulate network request
+  Future<List<String>> _getListData({bool hasError = false}) async {
     await Future.delayed(Duration(seconds: 2));
+    if (hasError){
+      return Future.error('An error occurred while fetching the data. Please try again later.');
+    }
     return List<String>.generate(10, (index) => '$index title');
   }
 

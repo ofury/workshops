@@ -8,6 +8,7 @@
     ".gitpod.dockerfile": true,
     ".vscode": true,
     ".gitpod.yml": true,
-    "architecture": true
+    "architecture": true,
+    "startup_namer": true
   }
 }
