@@ -9,6 +9,7 @@
     ".vscode": true,
     ".gitpod.yml": true,
     "architecture": true,
-    "startup_namer": true
+    "startup_namer": true,
+    "friendlychat": true
   }
 }
