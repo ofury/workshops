@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 void main() {
-  runApp(new FriendlychatApp());
+  runApp(FriendlychatApp());
 }
 
 const String _name = "Nick";
-final ThemeData kIOSTheme = new ThemeData(
+final ThemeData kIOSTheme = ThemeData(
   primarySwatch: Colors.orange,
   primaryColor: Colors.grey[100],
   primaryColorBrightness: Brightness.light,
 );
 
-final ThemeData kDefaultTheme = new ThemeData(
+final ThemeData kDefaultTheme = ThemeData(
   primarySwatch: Colors.purple,
   accentColor: Colors.orangeAccent[400],
 );
@@ -21,12 +21,12 @@ final ThemeData kDefaultTheme = new ThemeData(
 class FriendlychatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: "Friendlychat",
-      theme: defaultTargetPlatform == TargetPlatform.iOS //new
-          ? kIOSTheme //new
-          : kDefaultTheme, //new
-      home: new ChatScreen(),
+      theme: defaultTargetPlatform == TargetPlatform.iOS
+          ? kIOSTheme
+          : kDefaultTheme,
+      home: ChatScreen(),
     );
   }
 }
@@ -38,91 +38,85 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = <ChatMessage>[];
-  final TextEditingController _textController = new TextEditingController();
+  final TextEditingController _textController = TextEditingController();
   bool _isComposing = false;
 
   @override
   void dispose() {
-    //new
-    for (ChatMessage message in _messages) //new
-      message.animationController.dispose(); //new
-    super.dispose(); //new
+    for (ChatMessage message in _messages)
+      message.animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Friendlychat"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Friendlychat"),
         elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
       ),
       body: Container(
-        child: new Column(
-          children: <Widget>[
-            new Flexible(
-              child: new ListView.builder(
-                padding: new EdgeInsets.all(8.0),
-                reverse: true,
-                //itemBuilder for a function that builds each widget in [index].
-                //Since we don't need the current build context, we can ignore the first argument of IndexedWidgetBuilder.
-                //Naming the argument _ (underscore) is a convention to indicate that it won't be used.
-                itemBuilder: (_, int index) => _messages[index],
-                itemCount: _messages.length,
+          child: Column(
+            children: <Widget>[
+              Flexible(
+                child: ListView.builder(
+                  padding: EdgeInsets.all(8.0),
+                  reverse: true,
+                  //itemBuilder for a function that builds each widget in [index].
+                  //Since we don't need the current build context, we can ignore the first argument of IndexedWidgetBuilder.
+                  //Naming the argument _ (underscore) is a convention to indicate that it won't be used.
+                  itemBuilder: (_, int index) => _messages[index],
+                  itemCount: _messages.length,
+                ),
               ),
-            ),
-            new Divider(height: 1.0),
-            new Container(
-              decoration: new BoxDecoration(color: Theme.of(context).cardColor),
-              child: _buildTextComposer(),
-            ),
-          ],
-        ),
-decoration: Theme.of(context).platform == TargetPlatform.iOS //new
-            ? new BoxDecoration(                                     //new
-                border: new Border(                                  //new
-                  top: new BorderSide(color: Colors.grey[200]),      //new
-                ),                                                   //new
-              )                                                      //new
-            : null),                                                 //modified
-  );
-}
+              Divider(height: 1.0),
+              Container(
+                decoration: BoxDecoration(color: Theme.of(context).cardColor),
+                child: _buildTextComposer(),
+              ),
+            ],
+          ),
+          decoration: Theme.of(context).platform == TargetPlatform.iOS
+              ? BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: Colors.grey[200]),
+                  ),
+                )
+              : null),
+    );
+  }
 
   Widget _buildTextComposer() {
-    return new IconTheme(
-      data: new IconThemeData(color: Theme.of(context).accentColor),
-      child: new Container(
+    return IconTheme(
+      data: IconThemeData(color: Theme.of(context).accentColor),
+      child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: new Row(
+        child: Row(
           children: <Widget>[
-            new Flexible(
-              child: new TextField(
+            Flexible(
+              child: TextField(
                 controller: _textController,
                 onChanged: (String text) {
-                  //new
                   setState(() {
-                    //new
-                    _isComposing = text.length > 0; //new
-                  }); //new
+                    _isComposing = text.length > 0;
+                  });
                 },
                 onSubmitted: _handleSubmitted,
                 decoration:
-                    new InputDecoration.collapsed(hintText: "Send a message"),
+                    InputDecoration.collapsed(hintText: "Send a message"),
               ),
             ),
-            new Container(
-              margin: new EdgeInsets.symmetric(horizontal: 4.0),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 4.0),
               child: Theme.of(context).platform == TargetPlatform.iOS
-                  ? //modified
-                  new CupertinoButton(
-                      //new
-                      child: new Text("Send"), //new
-                      onPressed: _isComposing //new
-                          ? () => _handleSubmitted(_textController.text) //new
+                  ? CupertinoButton(
+                      child: Text("Send"),
+                      onPressed: _isComposing
+                          ? () => _handleSubmitted(_textController.text)
                           : null,
                     )
-                  : //new
-                  new IconButton(
-                      icon: new Icon(Icons.send),
+                  : IconButton(
+                      icon: Icon(Icons.send),
                       onPressed: () => _handleSubmitted(_textController.text)),
             ),
           ],
@@ -134,58 +128,52 @@ decoration: Theme.of(context).platform == TargetPlatform.iOS //new
   void _handleSubmitted(String text) {
     _textController.clear();
     setState(() {
-      //new
-      _isComposing = false; //new
+      _isComposing = false;
     });
-    ChatMessage message = new ChatMessage(
+    ChatMessage message = ChatMessage(
       text: text,
-      animationController: new AnimationController(
-        //new
-        duration: new Duration(milliseconds: 700),
-        //The vsync prevents animations that are offscreen from consuming unnecessary resources.                   //new
-        vsync: this, //new
-      ), //new
-    ); //new
+      animationController: AnimationController(
+        duration: Duration(milliseconds: 700),
+        //The vsync prevents animations that are offscreen from consuming unnecessary resources.
+        vsync: this,
+      ),
+    );
     setState(() {
       _messages.insert(0, message);
     });
     //Attach the animation controller to a new ChatMessage instance,
-    //and specify that the animation should play forward whenever a new message is added to the chat list
-    message.animationController.forward(); //new
+    //and specify that the animation should play forward whenever a  new message is added to the chat list
+    message.animationController.forward();
   }
 }
 
 class ChatMessage extends StatelessWidget {
-  ChatMessage({this.text, this.animationController}); //modified
+  ChatMessage({this.text, this.animationController});
   final String text;
   final AnimationController animationController;
   @override
   Widget build(BuildContext context) {
-    return new SizeTransition(
-        //new
-        sizeFactor: new CurvedAnimation(
-            //new
-            parent: animationController,
-            curve: Curves.easeOut), //new
-        axisAlignment: 0.0, //new
-        child: new Container(
-          //modified
+    return SizeTransition(
+        sizeFactor:
+            CurvedAnimation(parent: animationController, curve: Curves.easeOut),
+        axisAlignment: 0.0,
+        child: Container(
           margin: const EdgeInsets.symmetric(vertical: 10.0),
-          child: new Row(
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              new Container(
+              Container(
                 margin: const EdgeInsets.only(right: 16.0),
-                child: new CircleAvatar(child: new Text(_name[0])),
+                child: CircleAvatar(child: Text(_name[0])),
               ),
               Expanded(
-                child: new Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    new Text(_name, style: Theme.of(context).textTheme.subhead),
-                    new Container(
+                    Text(_name, style: Theme.of(context).textTheme.subhead),
+                    Container(
                       margin: const EdgeInsets.only(top: 5.0),
-                      child: new Text(text),
+                      child: Text(text),
                     ),
                   ],
                 ),
