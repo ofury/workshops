@@ -10,6 +10,7 @@
     ".gitpod.yml": true,
     "architecture": true,
     "startup_namer": true,
-    "friendlychat": true
+    "friendlychat": true,
+    "cupertino_store": true
   }
 }
