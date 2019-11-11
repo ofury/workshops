@@ -32,12 +32,10 @@ class _HomeState extends State<Home> {
                 return _getInformationMessage(snapshot.error);
               }
 
-              // Use busy indicator instead of hasData from snapShot
               if (!snapshot.hasData || snapshot.data == HomeViewState.Busy) {
                 return Center(child: CircularProgressIndicator());
               }
 
-              // use explicit state instead of checking the lenght
               if (snapshot.data == HomeViewState.NoData) {
                 return _getInformationMessage(
                     'No data found for your account. Add something and check back.');

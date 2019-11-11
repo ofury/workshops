@@ -11,6 +11,7 @@
     "architecture": true,
     "startup_namer": true,
     "friendlychat": true,
-    "cupertino_store": true
+    "cupertino_store": true,
+    "flutter_basics": true
   }
 }
