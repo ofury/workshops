@@ -29,6 +29,7 @@ class HomeState extends State<Home> {
         title: Text(Strings.appTitle),
       ),
       body: ListView.builder(
+  //double the item count, and then return a Divider widget when the position in the list is odd
           itemCount: _members.length * 2,
           itemBuilder: (BuildContext context, int position) {
             if (position.isOdd) return Divider();
