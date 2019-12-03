@@ -8,10 +8,14 @@
     ".gitpod.dockerfile": true,
     ".vscode": true,
     ".gitpod.yml": true,
-    "architecture": true,
     "startup_namer": true,
     "friendlychat": true,
     "cupertino_store": true,
-    "flutter_basics": true
+    "flutter_basics": true,
+    "firebase_user_avatar_flutter": true,
+    "architecture": true,
+    "cat_app": true,
+    "github_team": true,
+    "trilogies": true
   }
 }
