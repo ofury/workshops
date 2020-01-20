@@ -17,6 +17,7 @@
     "cat_app": true,
     "github_team": true,
     "trilogies": true,
-    "counter_provider": true
+    "counter_provider": true,
+    "provider_get_it_architecture": true
   }
 }
