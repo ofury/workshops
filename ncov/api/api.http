@@ -1,4 +1,5 @@
 # Used to get an access token given an autorization key
+# Path to API settings - \workshops\.vscode\settings.json
 POST {{baseUrl}}/token?grant_type=client_credentials
 Authorization: Basic {{authorization}}
 

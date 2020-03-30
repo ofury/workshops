@@ -11,7 +11,7 @@
     "clean_dart_uis": true,
     "tactical_operators": true,
     ".gitpod.dockerfile": true,
-    ".vscode": true,
+    ".vscode": false,
     ".gitpod.yml": true,
     "startup_namer": true,
     "friendlychat": true,
@@ -26,5 +26,12 @@
     "provider_get_it_architecture": true,
     "firebase_authentication": true
   },
-  "explorerExclude.backup": null
+  "explorerExclude.backup": null,
+  "rest-client.environmentVariables": {
+    "sandbox": {
+      "baseUrl": "https://apigw.nubentos.com:443",
+      "authorization": ""
+    },
+    "production": {}
+  }
 }
