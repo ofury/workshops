@@ -5,9 +5,8 @@ import 'package:ncov/app/services/api.dart';
 import 'package:http/http.dart' as http;
 
 class APIService {
-  final API api;
-
   APIService(this.api);
+  final API api;
 
   Future<String> getAccessToken() async {
     final response = await http.post(
@@ -16,11 +15,13 @@ class APIService {
     );
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      final accessToken = data['access-token'];
+      final accessToken = data['access_token'];
       if (accessToken != null) {
         return accessToken;
       }
     }
+    print(
+        'Request ${api.tokenUri()} failed\nResponse: ${response.statusCode} ${response.reasonPhrase}');
     throw response;
   }
 
@@ -44,7 +45,8 @@ class APIService {
         }
       }
     }
-
+    print(
+        'Request $uri failed\nResponse: ${response.statusCode} ${response.reasonPhrase}');
     throw response;
   }
 
