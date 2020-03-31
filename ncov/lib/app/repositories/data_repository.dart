@@ -3,6 +3,7 @@ import 'package:http/http.dart';
 import 'package:ncov/app/repositories/endpoints_data.dart';
 import 'package:ncov/app/services/api.dart';
 import 'package:ncov/app/services/api_service.dart';
+import 'package:ncov/app/services/endpoint_data.dart';
 
 class DataRepository {
   DataRepository({@required this.apiService});
@@ -10,8 +11,8 @@ class DataRepository {
 
   String _accessToken;
 
-  Future<int> getEndpointData(Endpoint endpoint) async =>
-      await _getDataRefreshingToken<int>(
+  Future<EndpointData> getEndpointData(Endpoint endpoint) async =>
+      await _getDataRefreshingToken<EndpointData>(
         onGetData: () => apiService.getEndpointData(
             accessToken: _accessToken, endpoint: endpoint),
       );
