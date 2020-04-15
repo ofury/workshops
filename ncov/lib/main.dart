@@ -4,22 +4,33 @@ import 'package:intl/intl.dart';
 import 'package:ncov/app/repositories/data_repository.dart';
 import 'package:ncov/app/services/api.dart';
 import 'package:ncov/app/services/api_service.dart';
+import 'package:ncov/app/services/data_cache_service.dart';
 import 'package:ncov/app/ui/dashboard.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
-  await initializeDateFormatting();
+  WidgetsFlutterBinding.ensureInitialized();
   Intl.defaultLocale = 'en_GB';
-  runApp(MyApp());
+  await initializeDateFormatting();
+  final sharedPreferences = await SharedPreferences.getInstance();
+
+  runApp(MyApp(sharedPreferences: sharedPreferences));
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key key, this.sharedPreferences}) : super(key: key);
+  final SharedPreferences sharedPreferences;
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return Provider<DataRepository>(
       create: (_) => DataRepository(
         apiService: APIService(API.sandbox()),
+        dataCacheService: DataCacheService(
+          sharedPreferences: sharedPreferences,
+        ),
       ),
       child: MaterialApp(
         title: 'Flutter Demo',
